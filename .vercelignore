@@ -1,0 +1,10 @@
+# Exclude from Vercel deployment (not needed after build)
+node_modules
+.github
+.vscode
+stats.html
+dev-dist
+*.log
+Dockerfile
+docker-compose.yaml
+.dockerignore
