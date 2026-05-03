@@ -4,7 +4,7 @@ window.__CONFIG__ = {
   VITE_CORS_PROXY_URL: "",
 
   // The READ API key to access TMDB
-  VITE_TMDB_READ_API_KEY: "",
+  VITE_TMDB_READ_API_KEY: "930f5673a91af78bd7537f37f0c62555",
 
   // The DMCA email displayed in the footer, null to hide the DMCA link
   VITE_DMCA_EMAIL: null,
