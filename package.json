@@ -146,9 +146,6 @@
       "postcss@<8.4.31": ">=8.4.31",
       "@babel/traverse@<7.23.2": ">=7.23.2",
       "crypto-js@<4.2.0": ">=4.2.0"
-    },
-    "neverBuiltDependencies": [
-      "@p-stream/providers"
-    ]
+    }
   }
 }
