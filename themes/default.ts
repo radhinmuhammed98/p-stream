@@ -29,11 +29,12 @@ const tokens = {
       c300: "#8EA3B0", // Secondary button text
       c400: "#617A8A", // Main text in video player context
     },
+    // VEYRA: warm gold as secondary accent
     yellow: {
-      c100: "#FFF599", // Best onboarding highlight
-      c200: "#FCEC61", // Dropdown highlight hover
-      c300: "#D8C947", // Not currently used
-      c400: "#AFA349", // Dropdown highlight
+      c100: "#F5C16C", // Warm gold — best onboarding highlight (VEYRA secondary)
+      c200: "#f0b040", // Dropdown highlight hover
+      c300: "#d4912a", // Not currently used
+      c400: "#b87820", // Dropdown highlight
     },
     rose: {
       c100: "#DB3D61", // Authentication error text
@@ -54,17 +55,18 @@ const tokens = {
     c800: "#181818",
     c900: "#0f0f0f",
   },
+  // VEYRA: teal is the new purple — electric teal primary accent
   purple: {
-    c50: "#aaafff",
-    c100: "#8288fe",
-    c200: "#5a62eb",
-    c300: "#454cd4",
-    c400: "#333abe",
-    c500: "#292d86",
-    c600: "#1f2363",
-    c700: "#191b4a",
-    c800: "#111334", // Lightbar
-    c900: "#0b0d22",
+    c50: "#a0faf3",
+    c100: "#14E5D4",   // Electric teal — primary accent
+    c200: "#0ec4b5",
+    c300: "#0aa89b",
+    c400: "#088c82",
+    c500: "#066f68",
+    c600: "#05524e",
+    c700: "#03332f",
+    c800: "#011f1c", // Lightbar dark
+    c900: "#010e0d",
   },
   ash: {
     c50: "#8d8d8d",
@@ -102,28 +104,28 @@ export const defaultTheme = {
         ghost: tokens.white,
       },
 
-      // Branding
+      // Branding — VEYRA pill uses teal highlight
       pill: {
         background: tokens.black.c100,
         backgroundHover: tokens.black.c125,
-        highlight: tokens.blue.c200,
+        highlight: tokens.purple.c100, // electric teal
         activeBackground: tokens.shade.c700,
       },
 
-      // meta data for the theme itself
+      // meta data for the theme itself — VEYRA teal accents
       global: {
-        accentA: tokens.blue.c200,
-        accentB: tokens.blue.c300,
+        accentA: tokens.purple.c100, // electric teal
+        accentB: tokens.purple.c200,
       },
 
-      // light bar
+      // light bar — VEYRA dark teal glow
       lightBar: {
         light: tokens.purple.c800,
       },
 
-      // Buttons
+      // Buttons — VEYRA teal toggle and accent buttons
       buttons: {
-        toggle: tokens.purple.c300,
+        toggle: tokens.purple.c200,     // teal
         toggleDisabled: tokens.black.c200,
         danger: tokens.semantic.rose.c300,
         dangerHover: tokens.semantic.rose.c200,
@@ -134,8 +136,8 @@ export const defaultTheme = {
         primary: tokens.white,
         primaryText: tokens.black.c50,
         primaryHover: tokens.semantic.silver.c100,
-        purple: tokens.purple.c600,
-        purpleHover: tokens.purple.c400,
+        purple: tokens.purple.c500,     // teal dark
+        purpleHover: tokens.purple.c300, // teal mid
         cancel: tokens.black.c100,
         cancelHover: tokens.black.c150,
       },
@@ -154,9 +156,9 @@ export const defaultTheme = {
         background: tokens.shade.c800,
       },
 
-      // typography
+      // typography — VEYRA teal logo and links
       type: {
-        logo: tokens.purple.c100,
+        logo: tokens.purple.c100,   // electric teal
         emphasis: tokens.white,
         text: tokens.shade.c50,
         dimmed: tokens.shade.c50,
@@ -164,7 +166,7 @@ export const defaultTheme = {
         secondary: tokens.ash.c100,
         danger: tokens.semantic.red.c100,
         success: tokens.semantic.green.c100,
-        link: tokens.purple.c100,
+        link: tokens.purple.c100,   // electric teal
         linkHover: tokens.purple.c50,
       },
 
@@ -179,21 +181,22 @@ export const defaultTheme = {
       },
 
       // media cards
+      // media cards — VEYRA teal progress bar fill
       mediaCard: {
         hoverBackground: tokens.shade.c900,
         hoverAccent: tokens.black.c250,
         hoverShadow: tokens.black.c50,
         shadow: tokens.shade.c800,
         barColor: tokens.ash.c200,
-        barFillColor: tokens.purple.c100,
+        barFillColor: tokens.purple.c100, // electric teal
         badge: tokens.shade.c700,
         badgeText: tokens.ash.c100,
       },
 
-      // Large card
+      // Large card — VEYRA teal icon
       largeCard: {
         background: tokens.black.c100,
-        icon: tokens.purple.c400,
+        icon: tokens.purple.c300, // teal
       },
 
       // Dropdown
@@ -220,7 +223,7 @@ export const defaultTheme = {
         errorText: tokens.semantic.rose.c100,
       },
 
-      // Settings page
+      // Settings page — VEYRA teal active states
       settings: {
         sidebar: {
           activeLink: tokens.black.c100,
@@ -230,8 +233,8 @@ export const defaultTheme = {
             secondary: tokens.shade.c200,
             inactive: tokens.shade.c50,
             icon: tokens.black.c200,
-            iconActivated: tokens.purple.c200,
-            activated: tokens.purple.c100,
+            iconActivated: tokens.purple.c100, // teal
+            activated: tokens.purple.c50,      // light teal
           },
         },
 
@@ -251,17 +254,17 @@ export const defaultTheme = {
         divider: tokens.ash.c300,
       },
 
-      // Onboarding
+      // Onboarding — VEYRA teal progress, gold for best tier
       onboarding: {
         bar: tokens.shade.c400,
-        barFilled: tokens.purple.c300,
+        barFilled: tokens.purple.c200,  // teal
         divider: tokens.shade.c200,
         card: tokens.shade.c800,
         cardHover: tokens.shade.c700,
         border: tokens.shade.c600,
-        good: tokens.purple.c100,
-        best: tokens.semantic.yellow.c100,
-        link: tokens.purple.c100,
+        good: tokens.purple.c100,       // teal
+        best: tokens.semantic.yellow.c100, // warm gold
+        link: tokens.purple.c100,       // teal
       },
 
       // Error page
@@ -287,10 +290,11 @@ export const defaultTheme = {
         text: tokens.ash.c50,
       },
 
+      // progress bar — VEYRA teal fill
       progress: {
         background: tokens.ash.c50,
         preloaded: tokens.ash.c50,
-        filled: tokens.purple.c200,
+        filled: tokens.purple.c100, // electric teal
       },
 
       // video player
@@ -306,12 +310,12 @@ export const defaultTheme = {
           card: tokens.black.c50,
           error: tokens.semantic.red.c200,
           success: tokens.semantic.green.c200,
-          loading: tokens.purple.c200,
+          loading: tokens.purple.c100,  // teal
           noresult: tokens.black.c200,
         },
 
         audio: {
-          set: tokens.purple.c200,
+          set: tokens.purple.c100, // teal
         },
 
         context: {
@@ -326,7 +330,7 @@ export const defaultTheme = {
           inputPlaceholder: tokens.ash.c200,
           cardBorder: tokens.ash.c700,
           slider: tokens.black.c200,
-          sliderFilled: tokens.purple.c200,
+          sliderFilled: tokens.purple.c100,  // teal
           error: tokens.semantic.red.c200,
 
           buttons: {
@@ -339,7 +343,7 @@ export const defaultTheme = {
           type: {
             main: tokens.semantic.silver.c300,
             secondary: tokens.ash.c200,
-            accent: tokens.purple.c200,
+            accent: tokens.purple.c100,  // teal
           },
         },
       },

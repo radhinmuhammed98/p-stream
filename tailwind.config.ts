@@ -20,14 +20,14 @@ const config: Config = {
 
       /* fonts */
       fontFamily: {
-        main: "'DM Sans'", // "main": "'Open Sans'",
+        main: "'Outfit'", // VEYRA — cinematic geometric sans-serif
       },
 
       /* animations */
       keyframes: {
         "loading-pin": {
-          "0%, 40%, 100%": { height: "0.5em", "background-color": "#282336" },
-          "20%": { height: "1em", "background-color": "white" },
+          "0%, 40%, 100%": { height: "0.5em", "background-color": "#0d0d0d" },
+          "20%": { height: "1em", "background-color": "#14E5D4" }, // VEYRA teal pulse
         },
         "fade-in": {
           "0%": { opacity: "0" },

@@ -36,7 +36,7 @@
 [dir] .lightbar-visual {
   left: 0;
   --top: theme("colors.background.main", #030303);
-  --bottom: theme("colors.lightBar.light", #111334);
+  --bottom: #011f1c; /* VEYRA: teal dark glow */
   --first: conic-gradient(from 90deg at 80% 50%, var(--top), var(--bottom));
   --second: conic-gradient(from 270deg at 20% 50%, var(--bottom), var(--top));
   mask-image: radial-gradient(100% 50% at center center, black, transparent);

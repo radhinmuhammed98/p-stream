@@ -25,7 +25,7 @@ export function BrandPill(props: {
       <Icon className="text-2xl" icon={Icons.LOGO} />
       <span
         className={[
-          "font-semibold text-white",
+          "font-bold tracking-widest text-white uppercase",
           isMobile && props.header ? "hidden sm:block" : "",
         ].join(" ")}
       >
