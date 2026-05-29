@@ -1,4 +1,93 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap");
+
+/* ─── VEYRA Cinematic Atmosphere ─────────────────────────────────────────── */
+
+/* Page-wide gradient orbs: one teal (top-left), one gold (bottom-right) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(20, 229, 212, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 35% at 85% 100%, rgba(245, 193, 108, 0.05) 0%, transparent 70%);
+}
+
+/* Hero section cinematic gradient underlay */
+.veyra-hero-bg {
+  position: relative;
+}
+.veyra-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(20, 229, 212, 0.06) 0%, transparent 70%);
+  z-index: 0;
+}
+
+/* VEYRA hero brand title — teal gradient text */
+.veyra-brand-gradient {
+  background: linear-gradient(135deg, #14E5D4 0%, #a0faf3 50%, #F5C16C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Tagline fade-in */
+@keyframes veyra-fadein {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.veyra-tagline {
+  animation: veyra-fadein 0.7s ease-out 0.3s both;
+}
+
+/* Search bar focus ring — teal glow */
+.veyra-search-focus-ring:focus-within {
+  box-shadow: 0 0 0 2px rgba(20, 229, 212, 0.35), 0 8px 32px rgba(20, 229, 212, 0.12);
+  transition: box-shadow 0.25s ease;
+}
+
+/* Navbar glass bar */
+.veyra-nav-glass {
+  background: rgba(10, 10, 10, 0.72) !important;
+  backdrop-filter: blur(18px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.4) !important;
+  border-bottom: 1px solid rgba(20, 229, 212, 0.08) !important;
+}
+
+/* Media card premium hover glow */
+.veyra-card-hover {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.veyra-card-hover:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow:
+    0 0 0 1px rgba(20, 229, 212, 0.18),
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(20, 229, 212, 0.08);
+}
+
+/* Card poster teal shimmer border on hover */
+.veyra-poster-border {
+  position: relative;
+}
+.veyra-poster-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(20, 229, 212, 0.0);
+  transition: border-color 0.3s ease;
+  pointer-events: none;
+}
+.group:hover .veyra-poster-border::after {
+  border-color: rgba(20, 229, 212, 0.22);
+}
+/* ──────────────────────────────────────────────────────────────────────────── */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

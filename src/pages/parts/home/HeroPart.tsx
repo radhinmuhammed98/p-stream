@@ -82,8 +82,15 @@ export function HeroPart({
         )}
       >
         {showTitle && (!isTV || search.length === 0) ? (
-          <div className="relative z-10 mb-16">
+          <div className="relative z-10 mb-16 veyra-hero-bg">
             <HeroTitle className="mx-auto max-w-md">{title}</HeroTitle>
+            {/* VEYRA brand tagline — warm gold, spaced caps */}
+            <p
+              className="veyra-tagline mt-3 text-sm font-medium tracking-[0.25em] uppercase"
+              style={{ color: "rgba(245, 193, 108, 0.85)" }}
+            >
+              Watch Beyond.
+            </p>
           </div>
         ) : null}
 

@@ -64,7 +64,7 @@ export function MediaCardSkeleton() {
   const enableMinimalCards = usePreferencesStore((s) => s.enableMinimalCards);
 
   return (
-    <Flare.Base className="group -m-[0.705em] rounded-xl bg-background-main transition-colors duration-300">
+    <Flare.Base className="veyra-card-hover group -m-[0.705em] rounded-xl bg-background-main transition-colors duration-300">
       <Flare.Light
         flareSize={300}
         cssColorVar="--colors-mediaCard-hoverAccent"
@@ -187,7 +187,7 @@ function MediaCardContent({
   return (
     <div ref={targetRef as React.RefObject<HTMLDivElement>}>
       <Flare.Base
-        className={`group -m-[0.705em] rounded-xl bg-background-main transition-colors duration-300 focus:relative focus:z-10 ${
+        className={`veyra-card-hover group -m-[0.705em] rounded-xl bg-background-main transition-colors duration-300 focus:relative focus:z-10 ${
           canLink ? "hover:bg-mediaCard-hoverBackground tabbable" : ""
         } ${closable ? "jiggle" : ""}`}
         tabIndex={canLink ? 0 : -1}
@@ -208,7 +208,7 @@ function MediaCardContent({
         >
           <div
             className={classNames(
-              "relative pb-[150%] w-full overflow-hidden rounded-xl bg-mediaCard-hoverBackground bg-cover bg-center transition-[border-radius] duration-300",
+              "veyra-poster-border relative pb-[150%] w-full overflow-hidden rounded-xl bg-mediaCard-hoverBackground bg-cover bg-center transition-[border-radius] duration-300",
               {
                 "group-hover:rounded-lg": canLink,
               },

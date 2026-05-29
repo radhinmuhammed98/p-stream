@@ -6,11 +6,12 @@ export interface HeroTitleProps {
 export function HeroTitle(props: HeroTitleProps) {
   return (
     <h1
-      className={`text-2xl font-bold text-white sm:text-3xl md:text-4xl ${
+      className={`text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl leading-tight ${
         props.className ?? ""
       }`}
     >
-      {props.children}
+      {/* Teal→white gradient text for VEYRA brand identity */}
+      <span className="veyra-brand-gradient">{props.children}</span>
     </h1>
   );
 }

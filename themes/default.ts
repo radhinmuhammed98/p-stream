@@ -180,17 +180,16 @@ export const defaultTheme = {
         text: tokens.white,
       },
 
-      // media cards
       // media cards — VEYRA teal progress bar fill
       mediaCard: {
-        hoverBackground: tokens.shade.c900,
-        hoverAccent: tokens.black.c250,
+        hoverBackground: tokens.shade.c800,
+        hoverAccent: tokens.shade.c200,
         hoverShadow: tokens.black.c50,
         shadow: tokens.shade.c800,
         barColor: tokens.ash.c200,
         barFillColor: tokens.purple.c100, // electric teal
         badge: tokens.shade.c700,
-        badgeText: tokens.ash.c100,
+        badgeText: tokens.ash.c50,
       },
 
       // Large card — VEYRA teal icon
