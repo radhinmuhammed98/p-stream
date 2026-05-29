@@ -38,7 +38,10 @@ export const SearchBarInput = forwardRef<HTMLInputElement, SearchBarProps>(
     }, [props.isInFeatured]);
 
     return (
-      <div ref={containerRef} className="veyra-search-focus-ring rounded-[28px]">
+      <div
+        ref={containerRef}
+        className="veyra-search-focus-ring rounded-[28px]"
+      >
         <Flare.Base
           className={c({
             "hover:flare-enabled group flex flex-col rounded-[28px] transition-colors sm:flex-row sm:items-center relative": true,
