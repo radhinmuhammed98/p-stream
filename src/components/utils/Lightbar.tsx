@@ -2,6 +2,7 @@ import "./Lightbar.css";
 
 interface LightbarProps {
   className?: string;
+  noParticles?: boolean;
 }
 
 export function Lightbar(props: LightbarProps) {
