@@ -10,7 +10,7 @@ export function Lightbar(props: LightbarProps) {
     <div className="absolute inset-0 w-full h-[680px] overflow-hidden pointer-events-none -mt-64">
       <div className="max-w-screen w-full h-[680px] relative pt-64">
         <div className={props.className}>
-          <div className="lightbar">
+          <div className="lightbar" data-no-particles={props.noParticles}>
             <div className="lightbar-visual" />
           </div>
         </div>
