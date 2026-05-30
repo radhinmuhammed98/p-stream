@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { Icon, Icons } from "@/components/Icon";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function BrandPill(props: {
@@ -23,7 +22,11 @@ export function BrandPill(props: {
           : "",
       )}
     >
-      <img src="/veyra_logo.png" className="h-6 w-auto object-contain filter brightness-100" alt="Veyra" />
+      <img
+        src="/veyra_logo.png"
+        className="h-6 w-auto object-contain filter brightness-100"
+        alt="Veyra"
+      />
       <span
         className={[
           "font-bold tracking-widest text-white uppercase font-header",
