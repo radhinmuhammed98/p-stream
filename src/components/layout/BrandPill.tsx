@@ -23,10 +23,10 @@ export function BrandPill(props: {
           : "",
       )}
     >
-      <Icon className="text-2xl" icon={Icons.LOGO} />
+      <img src="/veyra_logo.png" className="h-6 w-auto object-contain filter brightness-100" alt="Veyra" />
       <span
         className={[
-          "font-bold tracking-widest text-white uppercase",
+          "font-bold tracking-widest text-white uppercase font-header",
           isMobile && props.header ? "hidden sm:block" : "",
         ].join(" ")}
       >
