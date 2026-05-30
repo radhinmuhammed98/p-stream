@@ -20,7 +20,9 @@ const config: Config = {
 
       /* fonts */
       fontFamily: {
-        main: "'Outfit'", // VEYRA — cinematic geometric sans-serif
+        main: "var(--font-main, 'Outfit')",
+        header: "var(--font-header, 'Bebas Neue')",
+        mono: "var(--font-mono, 'Share Tech Mono')",
       },
 
       /* animations */

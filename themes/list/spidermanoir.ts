@@ -1,3 +1,5 @@
+import { createTheme } from "../types";
+
 const tokens = {
   white: "#FFFFFF",
   black: {
@@ -69,7 +71,8 @@ const tokens = {
   },
 };
 
-export const defaultTheme = {
+export default createTheme({
+  name: "spidermanoir",
   extend: {
     colors: {
       themePreview: {
@@ -302,4 +305,4 @@ export const defaultTheme = {
       },
     },
   },
-};
+});

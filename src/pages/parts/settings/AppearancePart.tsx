@@ -113,6 +113,11 @@ const availableThemes = [
     key: "settings.appearance.themes.spiderman",
   },
   {
+    id: "spidermanoir",
+    selector: "theme-spidermanoir",
+    key: "settings.appearance.themes.spidermanoir",
+  },
+  {
     id: "wolverine",
     selector: "theme-wolverine",
     key: "settings.appearance.themes.wolverine",

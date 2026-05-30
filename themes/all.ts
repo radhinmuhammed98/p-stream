@@ -20,8 +20,10 @@ import autumn from "./list/autumn";
 import cobalt from "./list/cobalt";
 import frost from "./list/frost";
 import christmas from "./list/christmas";
+import spidermanoir from "./list/spidermanoir";
 
 export const allThemes = [
+  spidermanoir,
   teal,
   blue,
   gray,
