@@ -221,7 +221,6 @@ export function SettingsPage() {
         }
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Handle hash changes after initial load

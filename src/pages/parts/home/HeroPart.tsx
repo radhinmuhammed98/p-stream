@@ -19,21 +19,6 @@ export interface HeroPartProps {
   isInFeatured?: boolean;
 }
 
-function getTimeOfDay(
-  date: Date,
-): "night" | "morning" | "day" | "420" | "69" | "halloween" {
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  if (month === 4 && day === 20) return "420";
-  if (month === 6 && day === 9) return "69";
-  if (month === 10 && day === 31) return "halloween";
-  const hour = date.getHours();
-  if (hour < 5) return "night";
-  if (hour < 12) return "morning";
-  if (hour < 19) return "day";
-  return "night";
-}
-
 export function HeroPart({
   setIsSticky,
   searchParams,
@@ -67,8 +52,6 @@ export function HeroPart({
     ? navbarHeight + bannerSize + (isIOSPWA ? 34 : 0)
     : bannerSize + 14;
 
-  const time = getTimeOfDay(new Date());
-  const title = randomT(`home.titles.${time}`);
   const placeholder = randomT(`home.search.placeholder`);
   const inputRef = useRef<HTMLInputElement>(null);
   useSlashFocus(inputRef);
@@ -77,19 +60,27 @@ export function HeroPart({
     <ThinContainer>
       <div
         className={classNames(
-          "space-y-16 text-center",
-          showTitle ? "mt-44" : "mt-4",
+          "space-y-10 text-center",
+          showTitle ? "mt-28" : "mt-4",
         )}
       >
         {showTitle && (!isTV || search.length === 0) ? (
-          <div className="relative z-10 mb-16 veyra-hero-bg">
-            <HeroTitle className="mx-auto max-w-md">{title}</HeroTitle>
-            {/* VEYRA brand tagline — warm gold, spaced caps */}
-            <p
-              className="veyra-tagline mt-3 text-sm font-medium tracking-[0.25em] uppercase"
-              style={{ color: "rgba(245, 193, 108, 0.85)" }}
-            >
-              Watch Beyond.
+          <div className="relative z-10 mb-10 veyra-hero-identity">
+            {/* Atmospheric teal glow orb */}
+            <div className="veyra-hero-glow" aria-hidden="true" />
+
+            {/* VEYRA wordmark */}
+            <HeroTitle className="mx-auto max-w-md veyra-wordmark-hero">
+              VEYRA
+            </HeroTitle>
+
+            {/* Tagline */}
+            <p className="veyra-hero-tagline">Watch Beyond.</p>
+
+            {/* Description */}
+            <p className="veyra-hero-description">
+              Discover films, series and stories through a cleaner cinematic
+              experience.
             </p>
           </div>
         ) : null}

@@ -14,7 +14,68 @@ body::before {
     radial-gradient(ellipse 50% 35% at 85% 100%, rgba(245, 193, 108, 0.05) 0%, transparent 70%);
 }
 
-/* Hero section cinematic gradient underlay */
+/* ─── VEYRA Hero Identity ─────────────────────────────────────────────────── */
+
+/* Wrapper — positions the glow orb relative to the hero block */
+.veyra-hero-identity {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Atmospheric teal glow orb behind the wordmark */
+.veyra-hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 90% at 50% 10%, rgba(20, 229, 212, 0.11) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 55% at 50% 5%,  rgba(20, 229, 212, 0.07) 0%, transparent 70%);
+  filter: blur(1px);
+}
+
+/* VEYRA brand gradient text — used by HeroTitle component */
+.veyra-brand-gradient {
+  background: linear-gradient(135deg, #14E5D4 0%, #a0faf3 45%, #F5C16C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* VEYRA wordmark — large, bold, gradient */
+.veyra-wordmark-hero {
+  letter-spacing: 0.18em !important;
+  font-size: clamp(3rem, 8vw, 5.5rem) !important;
+  line-height: 1 !important;
+  animation: veyra-fadein 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Tagline — warm gold, spaced, uppercase */
+.veyra-hero-tagline {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(245, 193, 108, 0.82);
+  animation: veyra-fadein 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+/* Description — muted, cinematic */
+.veyra-hero-description {
+  margin-top: 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 350;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.015em;
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  animation: veyra-fadein 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+/* Retained for backward-compat (used elsewhere) */
 .veyra-hero-bg {
   position: relative;
 }
@@ -27,22 +88,17 @@ body::before {
   z-index: 0;
 }
 
-/* VEYRA hero brand title — teal gradient text */
-.veyra-brand-gradient {
-  background: linear-gradient(135deg, #14E5D4 0%, #a0faf3 50%, #F5C16C 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Tagline fade-in */
+/* Fade-in keyframe */
 @keyframes veyra-fadein {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Legacy tagline class kept for safety */
 .veyra-tagline {
   animation: veyra-fadein 0.7s ease-out 0.3s both;
 }
+
 
 /* Search bar focus ring — teal glow */
 .veyra-search-focus-ring:focus-within {

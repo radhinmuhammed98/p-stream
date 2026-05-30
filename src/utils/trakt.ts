@@ -18,7 +18,6 @@ import {
 export const TRAKT_API_URL = "https://api.trakt.tv";
 
 export class TraktService {
-  // eslint-disable-next-line no-use-before-define -- self-reference for singleton
   private static instance: TraktService;
 
   private readonly MIN_API_INTERVAL = 500;
@@ -433,7 +432,7 @@ export class TraktService {
     const fetchAll = async (endpoint: string) => {
       let page = 1;
       const items: TraktWatchedItem[] = [];
-      // eslint-disable-next-line no-constant-condition -- pagination loop
+
       while (true) {
         const results = await this.apiRequest<TraktWatchedItem[]>(
           `${endpoint}?extended=full,images&page=${page}&limit=${limit}`,

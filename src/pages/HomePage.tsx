@@ -13,6 +13,7 @@ import DiscoverContent from "@/pages/discover/discoverContent";
 import { HomeLayout } from "@/pages/layouts/HomeLayout";
 import { BookmarksCarousel } from "@/pages/parts/home/BookmarksCarousel";
 import { BookmarksPart } from "@/pages/parts/home/BookmarksPart";
+import { FeaturesPart } from "@/pages/parts/home/FeaturesPart";
 import { HeroPart } from "@/pages/parts/home/HeroPart";
 import { WatchingCarousel } from "@/pages/parts/home/WatchingCarousel";
 import { WatchingPart } from "@/pages/parts/home/WatchingPart";
@@ -178,6 +179,8 @@ export function HomePage() {
 
         {conf().SHOW_AD ? <AdsPart /> : null}
       </div>
+
+      {!search && <FeaturesPart />}
 
       {/* Search */}
       {search && (
