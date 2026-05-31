@@ -216,6 +216,26 @@ export function FeaturedCarousel({
       }
       try {
         if (effectiveCategory === "movies" || effectiveCategory === "tvshows") {
+          // Define a highlight item promise (e.g. Spider-Man Into the Spider-Verse or Spider-Noir)
+          let highlightPromise: Promise<any> | null = null;
+          if (effectiveCategory === "movies") {
+            highlightPromise = get<any>(`/movie/324857`, {
+              api_key: conf().TMDB_READ_API_KEY,
+              language: formattedLanguage,
+              append_to_response: "external_ids",
+            })
+              .then((item) => ({ ...item, type: "movie" as const }))
+              .catch(() => null);
+          } else if (effectiveCategory === "tvshows") {
+            highlightPromise = get<any>(`/tv/220102`, {
+              api_key: conf().TMDB_READ_API_KEY,
+              language: formattedLanguage,
+              append_to_response: "external_ids",
+            })
+              .then((item) => ({ ...item, type: "show" as const }))
+              .catch(() => null);
+          }
+
           // First try to get IDs from Trakt discover endpoint
           try {
             const discoverData = await getDiscoverContent();
@@ -246,8 +266,17 @@ export function FeaturedCarousel({
                 effectiveCategory === "movies" ? "movie" : ("show" as const),
             }));
 
-            // Take the first SLIDE_QUANTITY items
-            setMedia(mediaItems.slice(0, SLIDE_QUANTITY));
+            let finalMedia = mediaItems.slice(0, SLIDE_QUANTITY);
+            if (highlightPromise) {
+              const highlight = await highlightPromise;
+              if (highlight) {
+                finalMedia = [
+                  highlight,
+                  ...finalMedia.filter((item) => item.id !== highlight.id),
+                ].slice(0, SLIDE_QUANTITY);
+              }
+            }
+            setMedia(finalMedia);
           } catch (traktError) {
             console.error(
               "Falling back to TMDB method",
@@ -284,7 +313,17 @@ export function FeaturedCarousel({
               const shuffledMovies = [...allMovies].sort(
                 () => 0.5 - Math.random(),
               );
-              setMedia(shuffledMovies.slice(0, SLIDE_QUANTITY));
+              let finalMedia = shuffledMovies.slice(0, SLIDE_QUANTITY);
+              if (highlightPromise) {
+                const highlight = await highlightPromise;
+                if (highlight) {
+                  finalMedia = [
+                    highlight,
+                    ...finalMedia.filter((item) => item.id !== highlight.id),
+                  ].slice(0, SLIDE_QUANTITY);
+                }
+              }
+              setMedia(finalMedia);
             } else if (effectiveCategory === "tvshows") {
               // First get the list of popular shows
               const listData = await get<any>("/tv/popular", {
@@ -313,7 +352,17 @@ export function FeaturedCarousel({
               const shuffledShows = [...allShows].sort(
                 () => 0.5 - Math.random(),
               );
-              setMedia(shuffledShows.slice(0, SLIDE_QUANTITY));
+              let finalMedia = shuffledShows.slice(0, SLIDE_QUANTITY);
+              if (highlightPromise) {
+                const highlight = await highlightPromise;
+                if (highlight) {
+                  finalMedia = [
+                    highlight,
+                    ...finalMedia.filter((item) => item.id !== highlight.id),
+                  ].slice(0, SLIDE_QUANTITY);
+                }
+              }
+              setMedia(finalMedia);
             }
           }
         } else if (effectiveCategory === "editorpicks") {

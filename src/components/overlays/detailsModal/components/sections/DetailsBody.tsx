@@ -200,7 +200,7 @@ export function DetailsBody({
 
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
           <Button
             onClick={onPlayClick}
             theme="purple"
@@ -229,6 +229,37 @@ export function DetailsBody({
                     ? t("details.resume")
                     : t("details.play")}
             </span>
+          </Button>
+
+          <Button
+            onClick={() => {
+              if (!data.id) return;
+              const baseSlug = data.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-");
+              let playUrl = "";
+              if (data.type === "movie") {
+                playUrl = `/media/tmdb-movie-${data.id}-${baseSlug}`;
+              } else if (data.type === "show") {
+                if (showProgress?.season?.id && showProgress?.episode?.id) {
+                  playUrl = `/media/tmdb-tv-${data.id}-${baseSlug}/${showProgress.season.id}/${showProgress.episode.id}`;
+                } else {
+                  playUrl = `/media/tmdb-tv-${data.id}-${baseSlug}`;
+                }
+              }
+              if (playUrl) {
+                window.location.assign(`${playUrl}?videasy=true`);
+              }
+            }}
+            theme="secondary"
+            className={classNames(
+              "flex-1 sm:flex-initial sm:w-auto",
+              "gap-2 h-12 rounded-lg px-4 py-2 my-1 transition-transform hover:scale-105 duration-100",
+              "text-md text-white flex items-center justify-center",
+            )}
+          >
+            <Icon icon={Icons.PLAY} className="text-white" />
+            <span className="text-white text-sm pr-1">Play (Videasy)</span>
           </Button>
           <div className="flex items-center gap-1 flex-shrink-0">
             <MediaBookmarkButton

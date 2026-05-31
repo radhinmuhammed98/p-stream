@@ -97,191 +97,210 @@ export function PlayerPart(props: PlayerPartProps) {
     setThumbsFeedbackData(null);
   }, []);
 
+  const sourceId = usePlayerStore((s) => s.sourceId);
+  const isVideasy = sourceId === "videasy";
+
   return (
     <Player.Container onLoad={props.onLoad} showingControls={showTargets}>
-      {props.children}
-      <PauseOverlay />
-      <Player.BlackOverlay
-        show={showTargets && status === playerStatus.PLAYING}
-      />
-      <Player.EpisodesRouter onChange={props.onMetaChange} />
-      <Player.SettingsRouter />
-      <Player.SubtitleView controlsShown={showTargets} />
-
-      {status === playerStatus.PLAYING ? (
-        <Player.CenterControls>
-          <Player.LoadingSpinner />
-          <Player.AutoPlayStart />
-          <Player.CastingNotification />
-        </Player.CenterControls>
-      ) : null}
-
-      <Player.CenterMobileControls
-        className="text-white"
-        show={showTouchTargets && status === playerStatus.PLAYING}
-      >
-        <Player.SkipBackward iconSizeClass="text-3xl" inControl={inControl} />
-        <Player.Pause
-          iconSizeClass="text-5xl"
-          className={isLoading ? "opacity-0" : "opacity-100"}
-        />
-        <Player.SkipForward iconSizeClass="text-3xl" inControl={inControl} />
-      </Player.CenterMobileControls>
-
-      <div
-        className={`absolute right-4 z-50 transition-all duration-300 ease-in-out ${
-          showTargets ? "top-16" : "top-1"
-        }`}
-      >
-        <WatchPartyStatus />
-      </div>
-
-      <Player.TopControls show={showTargets}>
-        <div className="grid grid-cols-[1fr,auto] xl:grid-cols-3 items-center">
-          <div className="flex space-x-3 items-center">
-            <Player.BackLink url={props.backUrl} />
-            <span className="text mx-3 text-type-secondary">/</span>
-            <Player.Title />
-
-            {isMobile && meta?.type === "show" && (
-              <span className="text-type-secondary text-sm whitespace-nowrap flex-shrink-0">
-                {t("media.episodeDisplay", {
-                  season: meta?.season?.number,
-                  episode: meta?.episode?.number,
-                })}
-              </span>
-            )}
-
-            <Player.InfoButton />
-
-            <Player.BookmarkButton />
-          </div>
-          <div className="text-center hidden xl:flex justify-center items-center">
-            <Player.EpisodeTitle />
-          </div>
-          <div className="hidden lg:flex items-center justify-end">
-            <BrandPill />
-          </div>
-          <div className="flex lg:hidden items-center justify-end">
-            {status === playerStatus.PLAYING ? (
-              <>
-                <Player.Airplay />
-                <Player.Chromecast />
-              </>
-            ) : null}
-          </div>
+      {isVideasy ? (
+        <div className="absolute top-6 left-6 z-50 transition-opacity duration-300 opacity-60 hover:opacity-100">
+          <Player.BackLink url={props.backUrl} />
         </div>
-      </Player.TopControls>
+      ) : (
+        <>
+          {props.children}
+          <PauseOverlay />
+          <Player.BlackOverlay
+            show={showTargets && status === playerStatus.PLAYING}
+          />
+          <Player.EpisodesRouter onChange={props.onMetaChange} />
+          <Player.SettingsRouter />
+          <Player.SubtitleView controlsShown={showTargets} />
 
-      <Player.BottomControls show={showTargets}>
-        {status !== playerStatus.PLAYING && !manualSourceSelection && <Tips />}
-        <div className="flex items-center justify-center space-x-3 h-full">
-          {status === playerStatus.SCRAPING ? (
-            <ScrapingPartInterruptButton />
-          ) : null}
           {status === playerStatus.PLAYING ? (
-            <>
-              {isMobile ? <Player.Time short /> : null}
-              <Player.ProgressBar />
-            </>
+            <Player.CenterControls>
+              <Player.LoadingSpinner />
+              <Player.AutoPlayStart />
+              <Player.CastingNotification />
+            </Player.CenterControls>
           ) : null}
-        </div>
-        <div className="hidden lg:flex justify-between" dir="ltr">
-          <Player.LeftSideControls>
-            {status === playerStatus.PLAYING ? (
-              <>
-                <Player.Pause />
-                <Player.SkipBackward inControl={inControl} />
-                <Player.SkipForward inControl={inControl} />
-                <Player.Volume />
-                <Player.Time />
-              </>
-            ) : null}
-          </Player.LeftSideControls>
-          <div className="flex items-center space-x-3">
-            <Player.Episodes inControl={inControl} />
-            <Player.SkipEpisodeButton
+
+          <Player.CenterMobileControls
+            className="text-white"
+            show={showTouchTargets && status === playerStatus.PLAYING}
+          >
+            <Player.SkipBackward
+              iconSizeClass="text-3xl"
               inControl={inControl}
-              onChange={props.onMetaChange}
             />
-            {status === playerStatus.PLAYING ? (
-              <>
-                <Player.Pip />
-                <Player.Airplay />
-                <Player.Chromecast />
-              </>
-            ) : null}
-            {status === playerStatus.PLAYBACK_ERROR ||
-            status === playerStatus.PLAYING ? (
-              <Player.Captions />
-            ) : null}
-            <Player.Settings />
-            {isShifting || isHoldingFullscreen ? (
-              <Player.Widescreen />
-            ) : (
-              <Player.Fullscreen />
-            )}
+            <Player.Pause
+              iconSizeClass="text-5xl"
+              className={isLoading ? "opacity-0" : "opacity-100"}
+            />
+            <Player.SkipForward
+              iconSizeClass="text-3xl"
+              inControl={inControl}
+            />
+          </Player.CenterMobileControls>
+
+          <div
+            className={`absolute right-4 z-50 transition-all duration-300 ease-in-out ${
+              showTargets ? "top-16" : "top-1"
+            }`}
+          >
+            <WatchPartyStatus />
           </div>
-        </div>
-        <div className="grid grid-cols-[2.5rem,1fr,2.5rem] gap-3 lg:hidden">
-          <div />
-          <div className="flex justify-center space-x-3">
-            {/* Disable PiP for iOS PWA */}
-            {!(isPWA && isIOS) && status === playerStatus.PLAYING && (
-              <Player.Pip />
-            )}
-            <Player.Episodes inControl={inControl} />
-            {status === playerStatus.PLAYING ? (
-              <div className="hidden ssm:block">
-                <Player.Captions />
+
+          <Player.TopControls show={showTargets}>
+            <div className="grid grid-cols-[1fr,auto] xl:grid-cols-3 items-center">
+              <div className="flex space-x-3 items-center">
+                <Player.BackLink url={props.backUrl} />
+                <span className="text mx-3 text-type-secondary">/</span>
+                <Player.Title />
+
+                {isMobile && meta?.type === "show" && (
+                  <span className="text-type-secondary text-sm whitespace-nowrap flex-shrink-0">
+                    {t("media.episodeDisplay", {
+                      season: meta?.season?.number,
+                      episode: meta?.episode?.number,
+                    })}
+                  </span>
+                )}
+
+                <Player.InfoButton />
+
+                <Player.BookmarkButton />
               </div>
-            ) : null}
-            <Player.Settings />
-          </div>
-          <div>
-            {status === playerStatus.PLAYING && (
-              <div
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-                className="select-none touch-none"
-                style={{ WebkitTapHighlightColor: "transparent" }}
-              >
-                {isHoldingFullscreen ? (
+              <div className="text-center hidden xl:flex justify-center items-center">
+                <Player.EpisodeTitle />
+              </div>
+              <div className="hidden lg:flex items-center justify-end">
+                <BrandPill />
+              </div>
+              <div className="flex lg:hidden items-center justify-end">
+                {status === playerStatus.PLAYING ? (
+                  <>
+                    <Player.Airplay />
+                    <Player.Chromecast />
+                  </>
+                ) : null}
+              </div>
+            </div>
+          </Player.TopControls>
+
+          <Player.BottomControls show={showTargets}>
+            {status !== playerStatus.PLAYING && !manualSourceSelection && (
+              <Tips />
+            )}
+            <div className="flex items-center justify-center space-x-3 h-full">
+              {status === playerStatus.SCRAPING ? (
+                <ScrapingPartInterruptButton />
+              ) : null}
+              {status === playerStatus.PLAYING ? (
+                <>
+                  {isMobile ? <Player.Time short /> : null}
+                  <Player.ProgressBar />
+                </>
+              ) : null}
+            </div>
+            <div className="hidden lg:flex justify-between" dir="ltr">
+              <Player.LeftSideControls>
+                {status === playerStatus.PLAYING ? (
+                  <>
+                    <Player.Pause />
+                    <Player.SkipBackward inControl={inControl} />
+                    <Player.SkipForward inControl={inControl} />
+                    <Player.Volume />
+                    <Player.Time />
+                  </>
+                ) : null}
+              </Player.LeftSideControls>
+              <div className="flex items-center space-x-3">
+                <Player.Episodes inControl={inControl} />
+                <Player.SkipEpisodeButton
+                  inControl={inControl}
+                  onChange={props.onMetaChange}
+                />
+                {status === playerStatus.PLAYING ? (
+                  <>
+                    <Player.Pip />
+                    <Player.Airplay />
+                    <Player.Chromecast />
+                  </>
+                ) : null}
+                {status === playerStatus.PLAYBACK_ERROR ||
+                status === playerStatus.PLAYING ? (
+                  <Player.Captions />
+                ) : null}
+                <Player.Settings />
+                {isShifting || isHoldingFullscreen ? (
                   <Player.Widescreen />
                 ) : (
                   <Player.Fullscreen />
                 )}
               </div>
-            )}
-          </div>
-        </div>
-      </Player.BottomControls>
+            </div>
+            <div className="grid grid-cols-[2.5rem,1fr,2.5rem] gap-3 lg:hidden">
+              <div />
+              <div className="flex justify-center space-x-3">
+                {/* Disable PiP for iOS PWA */}
+                {!(isPWA && isIOS) && status === playerStatus.PLAYING && (
+                  <Player.Pip />
+                )}
+                <Player.Episodes inControl={inControl} />
+                {status === playerStatus.PLAYING ? (
+                  <div className="hidden ssm:block">
+                    <Player.Captions />
+                  </div>
+                ) : null}
+                <Player.Settings />
+              </div>
+              <div>
+                {status === playerStatus.PLAYING && (
+                  <div
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
+                    className="select-none touch-none"
+                    style={{ WebkitTapHighlightColor: "transparent" }}
+                  >
+                    {isHoldingFullscreen ? (
+                      <Player.Widescreen />
+                    ) : (
+                      <Player.Fullscreen />
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </Player.BottomControls>
 
-      <Player.VolumeChangedPopout />
-      <Player.SubtitleDelayPopout />
-      <Player.SpeedChangedPopout />
-      <Player.TIDBSubmissionSuccessPopout />
-      <Player.UnreleasedEpisodeOverlay />
+          <Player.VolumeChangedPopout />
+          <Player.SubtitleDelayPopout />
+          <Player.SpeedChangedPopout />
+          <Player.TIDBSubmissionSuccessPopout />
+          <Player.UnreleasedEpisodeOverlay />
 
-      <Player.NextEpisodeButton
-        controlsShowing={showTargets}
-        onChange={props.onMetaChange}
-        inControl={inControl}
-      />
+          <Player.NextEpisodeButton
+            controlsShowing={showTargets}
+            onChange={props.onMetaChange}
+            inControl={inControl}
+          />
 
-      <SkipSegmentButton
-        controlsShowing={showTargets}
-        segments={segments}
-        inControl={inControl}
-        onChangeMeta={props.onMetaChange}
-        onSkipTriggered={handleSkipTriggered}
-      />
+          <SkipSegmentButton
+            controlsShowing={showTargets}
+            segments={segments}
+            inControl={inControl}
+            onChangeMeta={props.onMetaChange}
+            onSkipTriggered={handleSkipTriggered}
+          />
 
-      <ThumbsFeedback
-        controlsShowing={showTargets}
-        feedbackData={thumbsFeedbackData}
-        onAction={handleThumbsFeedback}
-      />
+          <ThumbsFeedback
+            controlsShowing={showTargets}
+            feedbackData={thumbsFeedbackData}
+            onAction={handleThumbsFeedback}
+          />
+        </>
+      )}
     </Player.Container>
   );
 }

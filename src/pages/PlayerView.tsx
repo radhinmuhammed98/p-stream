@@ -163,7 +163,17 @@ export function RealPlayerView() {
   const handleMetaReceived = useCallback(
     (detailedMeta: DetailedMeta, episodeId?: string) => {
       const playerMeta = setPlayerMeta(detailedMeta, episodeId);
-      if (playerMeta && shouldShowResumeScreen(playerMeta)) {
+      if (!playerMeta) return;
+
+      const query = new URLSearchParams(window.location.search);
+      if (query.get("videasy") === "true") {
+        const playerStore = usePlayerStore.getState();
+        playerStore.setSourceId("videasy");
+        setStatus(playerStatus.PLAYING);
+        return;
+      }
+
+      if (shouldShowResumeScreen(playerMeta)) {
         setStatus(playerStatus.RESUME);
       }
     },

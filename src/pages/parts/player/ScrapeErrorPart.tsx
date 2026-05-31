@@ -16,6 +16,8 @@ import { ScrapingItems, ScrapingSegment } from "@/hooks/useProviderScrape";
 import { ErrorContainer, ErrorLayout } from "@/pages/layouts/ErrorLayout";
 import { conf } from "@/setup/config";
 import { useOnboardingStore } from "@/stores/onboarding";
+import { playerStatus } from "@/stores/player/slices/source";
+import { usePlayerStore } from "@/stores/player/store";
 import { usePreferencesStore } from "@/stores/preferences";
 import { getExtensionState } from "@/utils/extension";
 import type { ExtensionStatus } from "@/utils/extension";
@@ -125,6 +127,18 @@ export function ScrapeErrorPart(props: ScrapeErrorPartProps) {
             className="mt-6"
           >
             {t("player.scraping.notFound.homeButton")}
+          </Button>
+          <Button
+            onClick={() => {
+              const playerStore = usePlayerStore.getState();
+              playerStore.setSourceId("videasy");
+              playerStore.setStatus(playerStatus.PLAYING);
+            }}
+            theme="purple"
+            padding="md:px-12 p-2.5"
+            className="mt-6"
+          >
+            Play with Videasy
           </Button>
           <Button
             onClick={() => modal.show()}

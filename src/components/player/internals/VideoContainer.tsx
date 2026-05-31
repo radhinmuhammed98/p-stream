@@ -5,6 +5,7 @@ import { convertSubtitlesToObjectUrl } from "@/components/player/utils/captions"
 import { playerStatus } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
 import { usePreferencesStore } from "@/stores/preferences";
+import { getVideasyUrl } from "@/utils/videasy";
 
 import { useInitializeSource } from "../hooks/useInitializePlayer";
 
@@ -125,11 +126,32 @@ function VideoElement() {
   );
 }
 
-export function VideoContainer() {
-  const show = useShouldShowVideoElement();
+function NativeVideoContainer() {
   useDisplayInterface();
   useInitializeSource();
+  return <VideoElement />;
+}
+
+export function VideoContainer() {
+  const show = useShouldShowVideoElement();
+  const sourceId = usePlayerStore((s) => s.sourceId);
+  const meta = usePlayerStore((s) => s.meta);
 
   if (!show) return null;
-  return <VideoElement />;
+
+  if (sourceId === "videasy" && meta) {
+    const url = getVideasyUrl(meta);
+    if (url) {
+      return (
+        <iframe
+          src={url}
+          className="absolute inset-0 w-full h-screen bg-black border-0 z-10"
+          allowFullScreen
+          allow="encrypted-media; autoplay"
+        />
+      );
+    }
+  }
+
+  return <NativeVideoContainer />;
 }

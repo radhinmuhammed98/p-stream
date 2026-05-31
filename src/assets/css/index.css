@@ -280,6 +280,194 @@ body::before {
   display: inline-flex;
   align-items: center;
 }
+
+/* ─── Spider-Man Noir Theme Brutalist Custom Overrides ───────────────────────── */
+.theme-spidermanoir body::before {
+  opacity: 0.92 !important; /* Slightly stronger halftone for texture */
+}
+
+/* Comic Panel Media Card Overrides */
+.theme-spidermanoir .veyra-poster-border {
+  border: 3px solid #ffffff !important;
+  box-shadow: 4px 4px 0px 0px #ffffff !important;
+  border-radius: 0px !important; /* Stark brutalist rectangles */
+  filter: grayscale(0.95) contrast(1.25) brightness(0.9) !important;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s cubic-bezier(0.25, 1, 0.5, 1), filter 0.2s !important;
+}
+
+.theme-spidermanoir .group:hover .veyra-poster-border {
+  transform: translate(-3px, -3px) !important;
+  box-shadow: 8px 8px 0px 0px #ffffff !important;
+  filter: grayscale(0.2) contrast(1.1) brightness(1.0) !important; /* High-contrast comic colors on hover */
+}
+
+/* Remove default card hover scaling/shadows to let the poster do the talking */
+.theme-spidermanoir .veyra-card-hover {
+  border-radius: 0px !important;
+  background-color: transparent !important;
+}
+
+.theme-spidermanoir .veyra-card-hover:hover {
+  transform: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+/* Typography & Headings (Bangers/Bebas Neue style) */
+.theme-spidermanoir h1,
+.theme-spidermanoir h2,
+.theme-spidermanoir h3,
+.theme-spidermanoir .media-card-title,
+.theme-spidermanoir h1 span,
+.theme-spidermanoir .font-bold {
+  font-family: var(--font-header) !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+/* Section/Carousel Headings with Stark backing shadow and outline */
+.theme-spidermanoir .flex.flex-1.items-center.font-bold.uppercase.text-type-text {
+  font-family: var(--font-header) !important;
+  font-size: 2.25rem !important;
+  letter-spacing: 0.06em !important;
+  color: #ffffff !important;
+  text-shadow: 
+    2px 2px 0px #000000, 
+    -1px -1px 0px #000000, 
+    1px -1px 0px #000000, 
+    -1px 1px 0px #000000, 
+    1px 1px 0px #000000,
+    4px 4px 0px rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Subtitles & info elements (typewriter style) */
+.theme-spidermanoir .media-info-container,
+.theme-spidermanoir .text-type-secondary,
+.theme-spidermanoir .dot-list,
+.theme-spidermanoir .text-xs,
+.theme-spidermanoir .text-sm {
+  font-family: var(--font-mono) !important;
+  color: #c0c0c0 !important;
+}
+
+/* Neo-Brutalist Buttons (Play, Resume, Play with Videasy) */
+.theme-spidermanoir button,
+.theme-spidermanoir a.tabbable,
+.theme-spidermanoir .tabbable {
+  border-radius: 0px !important;
+  font-family: var(--font-header) !important;
+  font-size: 1.15rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+.theme-spidermanoir button.tabbable,
+.theme-spidermanoir a.tabbable,
+.theme-spidermanoir button.bg-white,
+.theme-spidermanoir button.bg-buttons-purple,
+.theme-spidermanoir button.bg-buttons-cancel {
+  border: 3px solid #ffffff !important;
+  box-shadow: 4px 4px 0px 0px #ffffff !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.theme-spidermanoir button.tabbable *,
+.theme-spidermanoir a.tabbable *,
+.theme-spidermanoir button.bg-white *,
+.theme-spidermanoir button.bg-buttons-purple *,
+.theme-spidermanoir button.bg-buttons-cancel * {
+  color: #ffffff !important;
+}
+
+.theme-spidermanoir button.tabbable:hover,
+.theme-spidermanoir a.tabbable:hover,
+.theme-spidermanoir button.bg-white:hover,
+.theme-spidermanoir button.bg-buttons-purple:hover,
+.theme-spidermanoir button.bg-buttons-cancel:hover {
+  transform: translate(-3px, -3px) !important;
+  box-shadow: 7px 7px 0px 0px #ffffff !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.theme-spidermanoir button.tabbable:hover *,
+.theme-spidermanoir a.tabbable:hover *,
+.theme-spidermanoir button.bg-white:hover *,
+.theme-spidermanoir button.bg-buttons-purple:hover *,
+.theme-spidermanoir button.bg-buttons-cancel:hover * {
+  color: #000000 !important;
+}
+
+.theme-spidermanoir button.tabbable:active,
+.theme-spidermanoir a.tabbable:active,
+.theme-spidermanoir button.bg-white:active,
+.theme-spidermanoir button.bg-buttons-purple:active,
+.theme-spidermanoir button.bg-buttons-cancel:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 1px 1px 0px 0px #ffffff !important;
+}
+
+/* Neo-Brutalist Search Input overrides */
+.theme-spidermanoir .veyra-search-focus-ring {
+  background: #000000 !important;
+  border: 3px solid #ffffff !important;
+  box-shadow: 4px 4px 0px 0px #ffffff !important;
+  border-radius: 0px !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.theme-spidermanoir .veyra-search-focus-ring:focus-within {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px 0px #ffffff !important;
+}
+
+.theme-spidermanoir .veyra-search-focus-ring *,
+.theme-spidermanoir .veyra-search-focus-ring *::before,
+.theme-spidermanoir .veyra-search-focus-ring *::after {
+  border-radius: 0px !important;
+}
+
+.theme-spidermanoir .veyra-search-focus-ring input {
+  font-family: var(--font-mono) !important;
+  color: #ffffff !important;
+}
+
+/* Details Modal Dialog styling */
+.theme-spidermanoir .flex.absolute.inset-0.items-center.justify-center.pt-safe > div.group {
+  border: 4px solid #ffffff !important;
+  box-shadow: 12px 12px 0px 0px #000000 !important;
+  border-radius: 0px !important;
+  background-color: #0c0c0c !important;
+}
+
+.theme-spidermanoir .flex.absolute.inset-0.items-center.justify-center.pt-safe > div.group * {
+  border-radius: 0px !important;
+}
+
+.theme-spidermanoir .flex.absolute.inset-0.items-center.justify-center.pt-safe > div.group img {
+  border: 3px solid #ffffff !important;
+}
+
+/* Fix Navbar / Top Navigation Icons */
+.theme-spidermanoir .veyra-nav-glass a.tabbable,
+.theme-spidermanoir .veyra-nav-glass .tabbable,
+.theme-spidermanoir .veyra-nav-glass button {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.theme-spidermanoir .veyra-nav-glass a.tabbable:hover,
+.theme-spidermanoir .veyra-nav-glass .tabbable:hover,
+.theme-spidermanoir .veyra-nav-glass button:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
 /* ──────────────────────────────────────────────────────────────────────────── */
 @tailwind base;
 @tailwind components;

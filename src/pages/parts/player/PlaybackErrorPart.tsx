@@ -9,7 +9,7 @@ import { Paragraph } from "@/components/text/Paragraph";
 import { Title } from "@/components/text/Title";
 import { useOverlayRouter } from "@/hooks/useOverlayRouter";
 import { ErrorContainer, ErrorLayout } from "@/pages/layouts/ErrorLayout";
-import { getMediaKey } from "@/stores/player/slices/source";
+import { getMediaKey, playerStatus } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
 import { usePreferencesStore } from "@/stores/preferences";
 
@@ -142,6 +142,18 @@ export function PlaybackErrorPart(props: PlaybackErrorPartProps) {
                 {t("player.playbackError.resumeButton")}
               </Button>
             )}
+          <Button
+            onClick={() => {
+              const playerStore = usePlayerStore.getState();
+              playerStore.setSourceId("videasy");
+              playerStore.setStatus(playerStatus.PLAYING);
+            }}
+            theme="purple"
+            padding="md:px-12 p-2.5"
+            className="mt-6"
+          >
+            Play with Videasy
+          </Button>
           <Button
             onClick={handleOpenSourcePicker}
             theme="purple"

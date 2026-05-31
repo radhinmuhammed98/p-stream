@@ -85,6 +85,9 @@ function BaseContainer(props: { children?: ReactNode }) {
 
 export function Container(props: PlayerProps) {
   const propRef = useRef(props.onLoad);
+  const sourceId = usePlayerStore((s) => s.sourceId);
+  const isVideasy = sourceId === "videasy";
+
   useEffect(() => {
     propRef.current?.();
   }, []);
@@ -105,7 +108,9 @@ export function Container(props: PlayerProps) {
         <WatchPartyResetter />
         <AutoSkipSegments />
         <div className="relative h-screen overflow-hidden">
-          <VideoClickTarget showingControls={props.showingControls} />
+          {!isVideasy && (
+            <VideoClickTarget showingControls={props.showingControls} />
+          )}
           <HeadUpdater />
           {props.children}
         </div>
