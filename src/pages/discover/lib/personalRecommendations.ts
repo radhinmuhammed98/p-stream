@@ -82,15 +82,27 @@ export async function fetchFedSimilarItems(
   tmdbId: string,
   isTVShow: boolean,
 ): Promise<string[]> {
+  if (!tmdbId) return [];
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 2000); // 2-second timeout
+
   try {
     const endpoint = isTVShow
       ? `https://fed-similar.up.railway.app/tv/${tmdbId}`
       : `https://fed-similar.up.railway.app/movie/${tmdbId}`;
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (!response.ok) return [];
     const items = await response.json();
     return Array.isArray(items) ? items : [];
   } catch (error) {
+    clearTimeout(timeoutId);
+    if (import.meta.env.DEV) {
+      console.warn(
+        "Fed-similar API request failed (this is normal if CORS or server is down):",
+        error,
+      );
+    }
     return [];
   }
 }

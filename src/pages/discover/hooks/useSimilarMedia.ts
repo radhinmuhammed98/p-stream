@@ -113,17 +113,21 @@ export function useSimilarMedia({
       }
 
       // Fall back to TMDB recommendations
-      console.info(
-        "Fed-similar API returned insufficient or no results, falling back to TMDB",
-      );
+      if (import.meta.env.DEV) {
+        console.info(
+          "Fed-similar API returned insufficient or no results, falling back to TMDB",
+        );
+      }
       const tmdbResults = await getRelatedMedia(mediaId, type, limit);
       setMedia(tmdbResults);
     } catch (err) {
-      console.error("Failed to load similar media:", err);
+      if (import.meta.env.DEV) {
+        console.warn("Failed to load similar media:", err);
+        console.info("Attempting TMDB fallback...");
+      }
 
       // Try TMDB fallback on error
       try {
-        console.info("Attempting TMDB fallback...");
         const tmdbResults = await getRelatedMedia(mediaId, type, limit);
         setMedia(tmdbResults);
         setError(null);

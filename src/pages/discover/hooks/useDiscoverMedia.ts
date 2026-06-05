@@ -403,9 +403,11 @@ export function useDiscoverMedia({
           // If we have enough results from fed-similar, return them
           const minResults = isCarouselView ? 5 : 10;
           if (results.length >= minResults) {
-            console.info(
-              `Using fed-similar API results (${results.length} items)`,
-            );
+            if (import.meta.env.DEV) {
+              console.info(
+                `Using fed-similar API results (${results.length} items)`,
+              );
+            }
             return {
               results: results.map((item) => ({
                 ...item,
@@ -417,18 +419,22 @@ export function useDiscoverMedia({
         }
 
         // Fall back to TMDB recommendations
-        console.info(
-          "Fed-similar API returned insufficient or no results, falling back to TMDB",
-        );
+        if (import.meta.env.DEV) {
+          console.info(
+            "Fed-similar API returned insufficient or no results, falling back to TMDB",
+          );
+        }
         const data = await fetchTMDBMedia(
           `/${mediaType}/${mediaId}/recommendations`,
         );
         return data;
       } catch (err) {
-        console.error("Error fetching fed-similar recommendations:", err);
+        if (import.meta.env.DEV) {
+          console.warn("Error fetching fed-similar recommendations:", err);
+          console.info("Attempting TMDB fallback...");
+        }
 
         // Try TMDB fallback on error
-        console.info("Attempting TMDB fallback...");
         return fetchTMDBMedia(`/${mediaType}/${mediaId}/recommendations`);
       }
     },
